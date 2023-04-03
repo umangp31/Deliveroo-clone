@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Entypo, EvilIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import Categories from "../components/categories";
+import Categories from "../components/Categories";
 const Homescreen = () => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
