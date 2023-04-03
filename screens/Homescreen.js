@@ -13,6 +13,7 @@ import { Entypo, EvilIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
 const Homescreen = () => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
@@ -44,28 +45,43 @@ const Homescreen = () => {
       <View className="flex-row items-center space-x-2 pb-2 mx-4 ">
         <View className="flex-row flex-1 space-x-2  bg-gray-200 p-2 items-center rounded-md">
           <AntDesign name="search1" size={20} color="gray" />
-          <TextInput className="mr-6" placeholder="resturants and crusines" keyboardType="default" />
+          <TextInput
+            className="mr-6"
+            placeholder="resturants and crusines"
+            keyboardType="default"
+          />
         </View>
         <Feather name="sliders" size={20} color="#00CCBB" />
       </View>
 
-
       {/* Body */}
 
-      <ScrollView className="bg-gray-100"
+      <ScrollView
+        className="bg-gray-100"
         contentContainerStyle={{
-          paddingBottom:100,
+          paddingBottom: 100,
         }}
       >
         {/* Category */}
-          <Categories/>
-        
+        <Categories />
 
         {/* Featured Row */}
-
-
+        <FeaturedRow
+          id="12"
+          title="Featured"
+          description="any description"
+        />
+        <FeaturedRow
+          id="123"
+          title="Featured"
+          description="any description"
+        />
+        <FeaturedRow
+          id="1234"
+          title="Featured"
+          description="any description"
+        />
       </ScrollView>
-
     </SafeAreaView>
   );
 };
