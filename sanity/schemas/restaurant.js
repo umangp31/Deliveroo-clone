@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-export default defineType({
+export default ({
   name: "restaurant",
   title: "Restaurant",
   type: "document",
@@ -16,6 +16,11 @@ export default defineType({
       type:"string",
       title:"Short description",
       validation:(Rule)=>Rule.max(200),
+    },
+    {
+      name: "image",
+      type:"image",
+      title:"Image of the Restaurant",
     },
     {
       name: "lat",
