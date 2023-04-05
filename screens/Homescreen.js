@@ -7,20 +7,27 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect,useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo, EvilIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+import sanityClient from "../sanity";
 const Homescreen = () => {
   const navigation = useNavigation();
+  const [featuredCategory,useFeaturedCategory]=useState([])
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  useEffect(() => {
+    sanityClient.fetch()
+  }, [])
+  
   return (
     <SafeAreaView className="bg-white pt-5">
       <StatusBar barStyle={"dark-content"} backgroundColor={"transparent"} />

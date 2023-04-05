@@ -23,14 +23,14 @@ export default ({
       title:"Image of the Restaurant",
     },
     {
-      name: "lat",
-      type:"number",
-      title:"Latitude of the Resturant",
-    },
-    {
       name: "long",
       type:"number",
       title:"Longitude of the Resturant",
+    },
+    {
+      name: "lat",
+      type:"number",
+      title:"Latitude of the Resturant",
     },
     {
       name: "address",
