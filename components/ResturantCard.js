@@ -13,8 +13,6 @@ const ResturantCard = ({
   long,
   lat,
 }) => {
-  console.log("hiii");
-  console.log(imgUrl);
   return (
     <TouchableOpacity className="bg-white mr-3 shadow">
       <Image

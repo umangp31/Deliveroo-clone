@@ -7,7 +7,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React, { useLayoutEffect,useState } from "react";
+import React, { useEffect, useLayoutEffect,useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo, EvilIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -17,15 +17,34 @@ import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
 const Homescreen = () => {
   const navigation = useNavigation();
-  const [featuredCategory,useFeaturedCategory]=useState([])
+  const [featuredCategory,setFeaturedCategory]=useState([])
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
 
+  async function getDataFromSanity(){
+  const response=  await sanityClient.fetch(`
+   *[_type=="featured"]{
+    ...,
+    restaurants[]->{
+      ...,
+      dishes[]->,
+    },
+  }
+    `)
+    // ((data)=>{
+    //   setFeaturedCategory(data);
+    //   console.log('this is data ',data);
+    // })
+    console.log(response);
+    setFeaturedCategory(response)
+  }
+
   useEffect(() => {
-    sanityClient.fetch()
+    getDataFromSanity();
+    // console.log("ye he ",featuredCategory);
   }, [])
   
   return (
