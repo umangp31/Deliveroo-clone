@@ -44,7 +44,7 @@ const Homescreen = () => {
 
   useEffect(() => {
     getDataFromSanity();
-    // console.log("ye he ",featuredCategory);
+    // console.log("ye he ",featuredCategory);  
   }, [])
   
   return (
@@ -92,6 +92,14 @@ const Homescreen = () => {
         <Categories />
 
         {/* Featured Row */}
+        {featuredCategory?.map(category=>(
+          <FeaturedRow
+            id={category._id}
+            key={category._id}
+            title={category.name}
+            description={category.short_description}
+          />
+        ))}
         <FeaturedRow
           id="12"
           title="Featured"
