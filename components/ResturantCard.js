@@ -1,6 +1,8 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { EvilIcons } from "@expo/vector-icons";
+import { urlFor } from "../sanity";
+
 const ResturantCard = ({
   imgUrl,
   title,
@@ -13,7 +15,7 @@ const ResturantCard = ({
       <Image
         style={{ height: 144, width: 256, borderRadius: 5 }}
         source={{
-          uri: imgUrl,
+          uri: urlFor(imgUrl).url(),
         }}
       />
       <View className="px-3 pb-4">

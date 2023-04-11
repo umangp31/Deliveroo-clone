@@ -38,7 +38,7 @@ const Homescreen = () => {
     //   setFeaturedCategory(data);
     //   console.log('this is data ',data);
     // })
-    console.log(response);
+    // console.log(response);
     setFeaturedCategory(response)
   }
 
@@ -100,7 +100,7 @@ const Homescreen = () => {
             description={category.short_description}
           />
         ))}
-        <FeaturedRow
+        {/* <FeaturedRow
           id="12"
           title="Featured"
           description="any description"
@@ -114,7 +114,7 @@ const Homescreen = () => {
           id="1234"
           title="Featured"
           description="any description"
-        />
+        /> */}
       </ScrollView>
     </SafeAreaView>
   );

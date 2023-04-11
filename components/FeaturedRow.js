@@ -5,10 +5,12 @@ import ResturantCard from "./ResturantCard";
 import sanityClient from "../sanity";
 const FeaturedRow = ({ title, description, id }) => {
   const [restaurantData, setrestaurantData] = useState([]);
-  const response = async function getRestaurantData() {
-    await sanityClient.fetch(
-      `
-    *[_type=="featured" && _id==${id}]{
+  console.log('ye id he  ',id);
+  async function getRestaurantData() {
+    const response= await sanityClient
+      .fetch(
+        `
+    *[_type=="featured" && _id=='${id}']{
       ...,
       restaurants[]->{
         ...,
@@ -19,12 +21,16 @@ const FeaturedRow = ({ title, description, id }) => {
       },
     }[0]
     `,
-      { id }
-    );
-  };
+        // { id }
+      )
+      // const newdata= response.json();
+      setrestaurantData(response?.restaurants);
+      console.log('this is neww   ',response?.restaurants[0]?.image);
+
+  }
   useEffect(() => {
-    setrestaurantData(response);
-    console.log(restaurantData);
+    getRestaurantData();
+    // console.log("ye he ansssssssss ", restaurantData);
   }, []);
 
   return (
@@ -42,16 +48,20 @@ const FeaturedRow = ({ title, description, id }) => {
         showsHorizontalScrollIndicator={false}
         className="pt-4"
       >
-        {/* Resturant card  */}
-        {/* {restaurantData.map((category) => {
-          <ResturantCard
+        {/* Resturant card   */}
+        {restaurantData &&  restaurantData.map((category) => {
+          console.log('cateeeeee   ',category);
+          return <ResturantCard
             id={category?._id}
             imgUrl={category?.image}
-            title={category?.title}
+            title={category?.name}
+            rating={category?.rating}
+            // address={category?.address}
+            // genre={category?.type}
           />
-        })} */}
+        })}
 
-        <ResturantCard
+        {/* <ResturantCard
           id={123}
           imgUrl="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           title="GM Naan"
@@ -95,7 +105,7 @@ const FeaturedRow = ({ title, description, id }) => {
           dishes={[]}
           long={20}
           lat={0}
-        />
+        /> */}
       </ScrollView>
     </View>
   );
