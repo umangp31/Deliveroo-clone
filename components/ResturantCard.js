@@ -10,10 +10,16 @@ const ResturantCard = ({
   genre,
   address,
 }) => {
+  const truncate = (str, max = 10) => {
+    const array = str.trim().split(' ');
+    const ellipsis = array.length > max ? '...' : '';
+  
+    return array.slice(0, max).join(' ') + ellipsis;
+  };
   return (
     <TouchableOpacity className="bg-white mr-3 shadow">
       <Image
-        style={{ height: 144, width: 256, borderRadius: 5 }}
+        style={{ height: 144, width: 256, borderRadius: 5,resizeMode:"cover" }}
         source={{
           uri: urlFor(imgUrl).url(),
         }}
@@ -29,7 +35,7 @@ const ResturantCard = ({
 
         <View className="flex-row items-center space-x-1">
           <EvilIcons name="location" size={24} color="black" />
-          <Text className="text-xs text-gray-500">Nearby * {address}</Text>
+          {/* <Text className={`${truncate}  text-xs text-gray-500  `}>Nearby * {address}</Text> */}
         </View>
       </View>
     </TouchableOpacity>

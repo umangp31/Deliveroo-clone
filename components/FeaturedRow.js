@@ -56,7 +56,7 @@ const FeaturedRow = ({ title, description, id }) => {
             imgUrl={category?.image}
             title={category?.name}
             rating={category?.rating}
-            // address={category?.address}
+            address={category?.address}
             // genre={category?.type}
           />
         })}
