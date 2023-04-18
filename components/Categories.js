@@ -1,8 +1,25 @@
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard";
+import sanityClient from "../sanity";
 
 const Categories = () => {
+  const [category, setcategory] = useState([])
+  async function getCategories(){
+    const response =await sanityClient.fetch( `
+    *[_type=="category" ]{
+      ...,
+    }
+    `,)
+    setcategory(response);
+    // console.log('Ye category ka ressss',response);
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, [])
+
+  
   return (
     <ScrollView
       horizontal
@@ -12,13 +29,10 @@ const Categories = () => {
         paddingTop: 10,
       }}
     >
-      <CategoryCard pic="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600" title="testing 1" />
-      <CategoryCard pic="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600" title="testing 2" />
-      <CategoryCard pic="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600" title="testing 3" />
-      <CategoryCard pic="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600" title="testing 4" />
-      <CategoryCard pic="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600" title="testing 4" />
-      <CategoryCard pic="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600" title="testing 4" />
-      <CategoryCard pic="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600" title="testing 4" /> 
+     {category.map((item,index)=>{
+      console.log(item?.image);
+      return <CategoryCard pic={item?.image?.asset?._ref} title={item.name}/>
+     })}
     </ScrollView>
   );
 };

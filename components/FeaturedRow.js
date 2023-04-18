@@ -25,7 +25,7 @@ const FeaturedRow = ({ title, description, id }) => {
       )
       // const newdata= response.json();
       setrestaurantData(response?.restaurants);
-      console.log('this is neww   ',response?.restaurants[0]?.image);
+      // console.log('this is neww   ',response?.restaurants[0]?.image);
 
   }
   useEffect(() => {
