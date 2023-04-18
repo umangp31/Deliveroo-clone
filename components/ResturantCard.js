@@ -8,7 +8,7 @@ const ResturantCard = ({
   title,
   rating,
   genre,
-  address,
+  area,
 }) => {
   const truncate = (str, max = 10) => {
     const array = str.trim().split(' ');
@@ -35,7 +35,7 @@ const ResturantCard = ({
 
         <View className="flex-row items-center space-x-1">
           <EvilIcons name="location" size={24} color="black" />
-          {/* <Text className={`${truncate}  text-xs text-gray-500  `}>Nearby * {address}</Text> */}
+          <Text className={`${truncate}  text-xs text-gray-500  `}>{area}</Text>
         </View>
       </View>
     </TouchableOpacity>

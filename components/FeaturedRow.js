@@ -57,7 +57,8 @@ const FeaturedRow = ({ title, description, id }) => {
             title={category?.name}
             rating={category?.rating}
             address={category?.address}
-            // genre={category?.type}
+            genre={category?.type.name}
+            area={category?.area}
           />
         })}
 
