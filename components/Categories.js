@@ -12,7 +12,6 @@ const Categories = () => {
     }
     `,)
     setcategory(response);
-    // console.log('Ye category ka ressss',response);
   }
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const Categories = () => {
       }}
     >
      {category.map((item,index)=>{
-      console.log(item?.image);
       return <CategoryCard pic={item?.image?.asset?._ref} title={item.name}/>
      })}
     </ScrollView>

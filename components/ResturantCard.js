@@ -2,24 +2,48 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { EvilIcons } from "@expo/vector-icons";
 import { urlFor } from "../sanity";
+import { useNavigation } from "@react-navigation/native";
 
 const ResturantCard = ({
+  id,
   imgUrl,
   title,
   rating,
   genre,
   area,
+  short_description,
+  long,
+  lat,
+  address,
+  dishes,
 }) => {
-  const truncate = (str, max = 10) => {
-    const array = str.trim().split(' ');
-    const ellipsis = array.length > max ? '...' : '';
-  
-    return array.slice(0, max).join(' ') + ellipsis;
-  };
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity className="bg-white mr-3 shadow">
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("Restaurant", {
+          id,
+          imgUrl,
+          title,
+          rating,
+          genre,
+          area,
+          short_description,
+          long,
+          lat,
+          address,
+          dishes,
+        });
+      }}
+      className="bg-white mr-3 shadow"
+    >
       <Image
-        style={{ height: 144, width: 256, borderRadius: 5,resizeMode:"cover" }}
+        style={{
+          height: 144,
+          width: 256,
+          borderRadius: 5,
+          resizeMode: "cover",
+        }}
         source={{
           uri: urlFor(imgUrl).url(),
         }}
@@ -35,7 +59,7 @@ const ResturantCard = ({
 
         <View className="flex-row items-center space-x-1">
           <EvilIcons name="location" size={24} color="black" />
-          <Text className={`${truncate}  text-xs text-gray-500  `}>{area}</Text>
+          <Text className={`text-xs text-gray-500  `}>{area}</Text>
         </View>
       </View>
     </TouchableOpacity>

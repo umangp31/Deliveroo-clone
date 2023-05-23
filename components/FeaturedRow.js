@@ -5,7 +5,6 @@ import ResturantCard from "./ResturantCard";
 import sanityClient from "../sanity";
 const FeaturedRow = ({ title, description, id }) => {
   const [restaurantData, setrestaurantData] = useState([]);
-  console.log('ye id he  ',id);
   async function getRestaurantData() {
     const response= await sanityClient
       .fetch(
@@ -21,16 +20,12 @@ const FeaturedRow = ({ title, description, id }) => {
       },
     }[0]
     `,
-        // { id }
       )
-      // const newdata= response.json();
       setrestaurantData(response?.restaurants);
-      // console.log('this is neww   ',response?.restaurants[0]?.image);
-
+      console.log('ans....',response?.restaurants);
   }
   useEffect(() => {
     getRestaurantData();
-    // console.log("ye he ansssssssss ", restaurantData);
   }, []);
 
   return (
@@ -50,7 +45,6 @@ const FeaturedRow = ({ title, description, id }) => {
       >
         {/* Resturant card   */}
         {restaurantData &&  restaurantData.map((category) => {
-          console.log('cateeeeee   ',category);
           return <ResturantCard
             id={category?._id}
             imgUrl={category?.image}
@@ -59,54 +53,13 @@ const FeaturedRow = ({ title, description, id }) => {
             address={category?.address}
             genre={category?.type.name}
             area={category?.area}
+            long={category?.long}
+            lat={category?.lat}
+            short_description={category?.short_description}
+            // dishes={category?.dishes[0] }
+            
           />
         })}
-
-        {/* <ResturantCard
-          id={123}
-          imgUrl="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          title="GM Naan"
-          rating={4.5}
-          genre="indian"
-          address="123 XYZ"
-        />
-
-        <ResturantCard
-          id={123}
-          imgUrl="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          title="GM Naan"
-          rating={4.5}
-          genre="indian"
-          address="123 XYZ"
-          shor_description="this is short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <ResturantCard
-          id={123}
-          imgUrl="https://images.pexels.com/photos/2608049/pexels-photo-2608049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          title="GM Naan"
-          rating={4.5}
-          genre="indian"
-          address="123 XYZ"
-          shor_description="this is short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <ResturantCard
-          id={123}
-          imgUrl="https://images.pexels.com/photos/3219483/pexels-photo-3219483.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          title="GM Naan"
-          rating={4.5}
-          genre="indian"
-          address="123 XYZ"
-          shor_description="this is short description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        /> */}
       </ScrollView>
     </View>
   );

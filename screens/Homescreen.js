@@ -100,21 +100,6 @@ const Homescreen = () => {
             description={category.short_description}
           />
         ))}
-        {/* <FeaturedRow
-          id="12"
-          title="Featured"
-          description="any description"
-        />
-        <FeaturedRow
-          id="123"
-          title="Featured"
-          description="any description"
-        />
-        <FeaturedRow
-          id="1234"
-          title="Featured"
-          description="any description"
-        /> */}
       </ScrollView>
     </SafeAreaView>
   );
