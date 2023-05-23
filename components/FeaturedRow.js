@@ -23,6 +23,8 @@ const FeaturedRow = ({ title, description, id }) => {
       )
       setrestaurantData(response?.restaurants);
       console.log('ans....',response?.restaurants);
+      // console.log('aaaaaaa',response?.restaurants[0].address);
+      // console.log('naya bhai ', response.restaurants[0]?.dishes);
   }
   useEffect(() => {
     getRestaurantData();
@@ -56,7 +58,7 @@ const FeaturedRow = ({ title, description, id }) => {
             long={category?.long}
             lat={category?.lat}
             short_description={category?.short_description}
-            // dishes={category?.dishes[0] }
+            dishes={category?.dishes }
             
           />
         })}
