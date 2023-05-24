@@ -40,7 +40,7 @@ const Restaurantscreen = () => {
   return (
     <SafeAreaView>
       <StatusBar barStyle={"dark-content"} />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="relative">
           <Image
             source={{

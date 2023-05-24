@@ -6,8 +6,9 @@ import {
   Image,
   TextInput,
   ScrollView,
+  FlatList,
 } from "react-native";
-import React, { useEffect, useLayoutEffect,useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo, EvilIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -17,15 +18,15 @@ import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
 const Homescreen = () => {
   const navigation = useNavigation();
-  const [featuredCategory,setFeaturedCategory]=useState([])
+  const [featuredCategory, setFeaturedCategory] = useState([]);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
 
-  async function getDataFromSanity(){
-  const response=  await sanityClient.fetch(`
+  async function getDataFromSanity() {
+    const response = await sanityClient.fetch(`
    *[_type=="featured"]{
     ...,
     restaurants[]->{
@@ -33,73 +34,75 @@ const Homescreen = () => {
       dishes[]->,
     },
   }
-    `)
+    `);
     // ((data)=>{
     //   setFeaturedCategory(data);
     //   console.log('this is data ',data);
     // })
     // console.log(response);
-    setFeaturedCategory(response)
+    setFeaturedCategory(response);
   }
 
   useEffect(() => {
     getDataFromSanity();
-    // console.log("ye he ",featuredCategory);  
-  }, [])
-  
+    // console.log("ye he ",featuredCategory);
+  }, []);
+
   return (
     <SafeAreaView className="bg-white pt-5">
       <StatusBar barStyle={"dark-content"} backgroundColor={"transparent"} />
-      {/* Header  */}
-      <View className="flex-row pb-3 items-center mx-4 space-x-2 justify-between">
-        <Image
-          source={{ uri: "https://links.papareact.com/wru" }}
-          className="h-6 w-6 bg-gray-300 p-4 rounded-full object-cover"
-        />
-        <View className="flex-1">
-          <Text className="font-bold text-gray-400 text-xs">Deliver Now</Text>
-          <Text className="font-bold text-xl">
-            Current location
-            <Entypo name="chevron-small-down" size={20} color="#00CCBB" />
-          </Text>
-        </View>
-        <AntDesign name="user" size={20} color="#00CCBB" />
-      </View>
-
-      {/* Search */}
-
-      <View className="flex-row items-center space-x-2 pb-2 mx-4 ">
-        <View className="flex-row flex-1 space-x-2  bg-gray-200 p-2 items-center rounded-md">
-          <AntDesign name="search1" size={20} color="gray" />
-          <TextInput
-            className="mr-6"
-            placeholder="resturants and crusines"
-            keyboardType="default"
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header  */}
+        <View className="flex-row pb-3 items-center mx-4 space-x-2 justify-between">
+          <Image
+            source={{ uri: "https://links.papareact.com/wru" }}
+            className="h-6 w-6 bg-gray-300 p-4 rounded-full object-cover"
           />
+          <View className="flex-1">
+            <Text className="font-bold text-gray-400 text-xs">Deliver Now</Text>
+            <Text className="font-bold text-xl">
+              Current location
+              <Entypo name="chevron-small-down" size={20} color="#00CCBB" />
+            </Text>
+          </View>
+          <AntDesign name="user" size={20} color="#00CCBB" />
         </View>
-        <Feather name="sliders" size={20} color="#00CCBB" />
-      </View>
 
-      {/* Body */}
+        {/* Search */}
 
-      <ScrollView
-        className="bg-gray-200"
-        contentContainerStyle={{
-          paddingBottom: 100,
-        }}
-      >
-        {/* Category */}
-        <Categories />
+        <View className="flex-row items-center space-x-2 pb-2 mx-4 ">
+          <View className="flex-row flex-1 space-x-2  bg-gray-200 p-2 items-center rounded-md">
+            <AntDesign name="search1" size={20} color="gray" />
+            <TextInput
+              className="mr-6"
+              placeholder="resturants and crusines"
+              keyboardType="default"
+            />
+          </View>
+          <Feather name="sliders" size={20} color="#00CCBB" />
+        </View>
 
-        {/* Featured Row */}
-        {featuredCategory?.map(category=>(
-          <FeaturedRow
-            id={category._id}
-            key={category._id}
-            title={category.name}
-            description={category.short_description}
-          />
-        ))}
+        {/* Body */}
+
+        <ScrollView
+          className="bg-gray-200"
+          contentContainerStyle={{
+            paddingBottom: 100,
+          }}
+        >
+          {/* Category */}
+          <Categories />
+
+          {/* Featured Row */}
+          {featuredCategory?.map((category) => (
+            <FeaturedRow
+              id={category._id}
+              key={category._id}
+              title={category.name}
+              description={category.short_description}
+            />
+          ))}
+        </ScrollView>
       </ScrollView>
     </SafeAreaView>
   );
